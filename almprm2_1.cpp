@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "almprm.hpp"
 
-std::vector<int64_t> almprm2(const int k, const int64_t n) {
+std::vector<int64_t> almprm2_1(const int k, const int64_t n) {
 
     std::vector<unsigned char> PF(n, 0);
     std::vector<int64_t> Pk;

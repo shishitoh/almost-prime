@@ -5,6 +5,9 @@
 
 #include "almprm.hpp"
 
+#define FUNC almprm2_1
+#define FUNCSTR "almprm2_1"
+
 int main() {
 
     std::chrono::high_resolution_clock::time_point begin, end;
@@ -23,7 +26,7 @@ int main() {
     for (int i = 0; i < COUNT; ++i) {
 
         begin = std::chrono::high_resolution_clock::now();
-        auto Pk = almprm2(k, n);
+        auto Pk = FUNC(k, n);
         end = std::chrono::high_resolution_clock::now();
 
         ms += std::chrono::duration_cast<std::chrono::milliseconds>(end-begin);
@@ -31,5 +34,5 @@ int main() {
         sleep(1);
     }
 
-    std::cout << "almprm(" << k << ", " << n << "): " << ms.count()/COUNT << " ms" << std::endl;
+    std::cout << FUNCSTR << "(" << k << ", " << n << "): " << ms.count()/COUNT << " ms" << std::endl;
 }

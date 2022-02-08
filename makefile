@@ -6,7 +6,7 @@ TARGET = almprm
 
 SRCS = main.cpp
 SRCS += almprm1.cpp
-SRCS += almprm2.cpp
+SRCS += almprm2_1.cpp
 SRCS += almprm2_2.cpp
 
 OBJS = $(SRCS:.cpp=.o)
