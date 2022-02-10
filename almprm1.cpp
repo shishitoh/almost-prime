@@ -1,8 +1,7 @@
 #include <vector>
 #include <algorithm>
-#include "almprm.hpp"
 
-std::vector<int64_t> almprm1(const int k, const int64_t n) {
+std::vector<int64_t> almprm1(const int8_t k, const int64_t n) {
 
     std::vector<std::vector<int64_t>> P(k+1);
     std::vector<int64_t> Pk;

@@ -1,10 +1,11 @@
 CC = g++
 
-CFLAGS = -fdiagnostics-color=always -g -O3 -std=c++20 -Wall
+CFLAGS = -fdiagnostics-color=always -g -O2 -std=c++20 -Wall
 
 TARGET = almprm
 
 SRCS = main.cpp
+SRCS += sieve.cpp
 SRCS += almprm1.cpp
 SRCS += almprm2_1.cpp
 SRCS += almprm2_2.cpp

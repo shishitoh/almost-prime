@@ -31,6 +31,13 @@ int main() {
 
         ms += std::chrono::duration_cast<std::chrono::milliseconds>(end-begin);
 
+        /*
+        for (auto pk : Pk) {
+            std::cout << pk << " ";
+        }
+        std::cout << std::endl;
+        */
+
         sleep(1);
     }
 

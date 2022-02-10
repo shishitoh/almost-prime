@@ -1,31 +1,32 @@
 #include <vector>
 #include <algorithm>
 
-#include "almprm.hpp"
-#include "../product-of-primes/sieve2.h"
+#include "sieve.hpp"
 
-std::vector<int64_t> almprm2_2(const int k, const int64_t n) {
+std::vector<int64_t> almprm2_2(const int8_t k, const int64_t n) {
 
-    auto P = sieve2<int64_t>((n >> (k-1)) + 1);
+    if (k == 0) [[unlikely]] return {1};
 
-    std::vector<unsigned char> PF(n);
-    std::vector<int64_t> Pk;
+    const auto P = sieve(-(-n >> (k-1)));
+
+    if (k == 1) [[unlikely]] return P;
+
+    const int64_t kp = 1 << k;
+    std::vector<int8_t> PF(n-kp);
 
     for (auto p : P) {
-        int64_t r = 1;
-        for (int i = 1; i <= k+1; ++i) {
-            r *= p;
-            if (r >= n) break;
-            for (int64_t j = r; j < n; j += r) {
-                ++PF[j];
+        for (int64_t j = 1, r = p; r < n && j <= k+1; ++j, r *= p) {
+            for (int64_t l = r - (kp-1)%r - 1; l < n-kp; l += r) {
+                ++PF[l];
             }
         }
     }
 
-    Pk.reserve(std::ranges::count(PF, k));
-    for (int64_t i = 0; i < n; ++i) {
-        if (PF[i] == k) {
-            Pk.push_back(i);
+    std::vector<int64_t> Pk(std::ranges::count(PF, k));
+    auto Pk_iter = std::begin(Pk);
+    for (int64_t j = 0; j < n-kp; ++j) {
+        if (PF[j] == k) {
+            *(Pk_iter++) = j + kp;
         }
     }
 
