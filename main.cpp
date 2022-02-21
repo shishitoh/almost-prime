@@ -5,8 +5,8 @@
 
 #include "almprm.hpp"
 
-#define FUNC almprm2_1
-#define FUNCSTR "almprm2_1"
+#define FUNC almprm3_1
+#define FUNCSTR "almprm3_1"
 
 int main() {
 

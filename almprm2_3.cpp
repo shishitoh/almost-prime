@@ -1,44 +1,53 @@
 #include <iostream>
-#include <cmath>
 #include <vector>
-#include <ranges>
 #include <algorithm>
+#include <bit>
 #include <chrono>
 
 #include "sieve.hpp"
 
-int64_t ipow(int64_t n, int64_t k) {
-    int64_t p = 1;
-    while (k > 0) {
-        if (k & 1) p *= n;
-        k >>= 1;
-        n *= n;
-    }
-    return p;
-}
-
-std::vector<int64_t> almprm2_2(const int8_t k, const int64_t n) {
+std::vector<int64_t> almprm2_3(const int8_t k, const int64_t n) {
 
     std::chrono::high_resolution_clock::time_point begin, end;
     std::chrono::milliseconds ms = std::chrono::milliseconds(0);
 
+    int64_t p;
+    const int64_t maxp = -(-n >> (k-1));
+    bool  pcontinue = 1;
+
     begin = std::chrono::high_resolution_clock::now();
-    const auto P = sieve(-(-n >> (k-1)));
+    std::vector<uint8_t> fP = flag_sieve(maxp);
     end = std::chrono::high_resolution_clock::now();
 
     ms = std::chrono::duration_cast<std::chrono::milliseconds>(end-begin);
 
     std::cout << "in sieve: " << ms.count() << " ms" << std::endl;
 
-    if (k == 1) [[unlikely]] return P;
+    if (k == 1) [[unlikely]] return to_primes(fP);
 
     const int64_t kp = 1 << k;
     std::vector<int8_t> PF(n-kp);
 
-    for (auto p : P) {
+    for (auto p : {2, 3, 5}) {
+        if (p >= maxp) [[unlikely]] {
+            pcontinue = 0;
+            break;
+        }
         for (int64_t j = 1, r = p; r < n && j <= k+1; ++j, r *= p) {
             for (int64_t l = r - (kp-1)%r - 1; l < n-kp; l += r) {
                 ++PF[l];
+            }
+        }
+    }
+    if (pcontinue) [[likely]] {
+        for (int64_t i = 0; i < fP.size(); ++i) {
+            for (uint8_t flag = fP[i]; flag; flag &= flag-1) {
+                p = 30*i + D[std::countr_zero(flag)];
+                for (int64_t j = 1, r = p; r < n && j <= k+1; ++j, r *= p) {
+                    for (int64_t l = r - (kp-1)%r - 1; l < n-kp; l += r) {
+                        ++PF[l];
+                    }
+                }
             }
         }
     }
