@@ -4,8 +4,16 @@ CFLAGS = -fdiagnostics-color=always -O2 -std=c++20 -Wall
 
 TARGET = almprm
 
-SRCS = main.cpp sieve.cpp merge.cpp
-SRCS += $(wildcard almprm*.cpp)
+SRCS = main.cpp
+SRCS += sieve.cpp
+SRCS += merge.cpp
+SRCS += almprm1.cpp
+SRCS += almprm2_1.cpp
+SRCS += almprm2_2.cpp
+SRCS += almprm2_3.cpp
+SRCS += almprm3_1.cpp
+SRCS += almprm3_2.cpp
+SRCS += almprm3_3.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -19,8 +27,9 @@ $(TARGET): $(OBJS)
 .cpp.o:
 	$(CXX) $(CFLAGS) $(INCDIR) -c $<
 
-clean:
-	del -f *.o *.exe
+main:
+	$(CXX) $(CLAFG) $(INCDIR) -c main.cpp
+	$(CXX) -o $(TARGET) $(OBJS) $(LIBDIR) $(LIBS)
 
-test: test.cpp
-	$(CXX) -o $@ $^ $(LIBDIR) $(LIBS)
+clean:
+	del -f *.o
