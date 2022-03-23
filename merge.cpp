@@ -100,18 +100,10 @@ void recursive_inplace_merge(std::vector<int64_t> &V,
     k = (m-separr[k-1] < separr[k]-m) ? k-1 : k;
 
     if (k-start > 1) {
-        if (separr[k]-separr[start] <= 32) {
-            std::sort(V.begin()+separr[start], V.begin()+separr[k]);
-        } else {
-            recursive_inplace_merge(V, separr, start, k);
-        }
+        recursive_inplace_merge(V, separr, start, k);
     }
     if (last-k > 1) {
-        if (separr[last] - separr[k] <= 32) {
-            std::sort(V.begin()+separr[k], V.begin()+separr[last]);
-        } else {
-            recursive_inplace_merge(V, separr, k, last);
-        }
+        recursive_inplace_merge(V, separr, k, last);
     }
     std::inplace_merge(V.begin()+separr[start], V.begin()+separr[k], V.begin()+separr[last]);
 }

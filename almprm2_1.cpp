@@ -4,13 +4,15 @@
 std::vector<int64_t> almprm2_1(const int8_t k, const int64_t n) {
 
     std::vector<int8_t> PF(n);
+    PF[0] = -1;
 
     for (int64_t i = 2; i < n; ++i) {
-        if (PF[i] == 0) {
-            for (int64_t j = 1, r = i; r < n && j <= k+1; ++j, r *= i) {
-                for (int64_t l = r; l < n; l += r) {
-                    ++PF[l];
-                }
+        if (PF[i]) {
+            continue;
+        }
+        for (int64_t j = 1, r = i; r < n && j <= k+1; ++j, r *= i) {
+            for (int64_t l = r; l < n; l += r) {
+                ++PF[l];
             }
         }
     }
