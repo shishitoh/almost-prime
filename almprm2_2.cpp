@@ -7,16 +7,6 @@
 
 #include "sieve.hpp"
 
-int64_t ipow(int64_t n, int64_t k) {
-    int64_t p = 1;
-    while (k > 0) {
-        if (k & 1) p *= n;
-        k >>= 1;
-        n *= n;
-    }
-    return p;
-}
-
 std::vector<int64_t> almprm2_2(const int8_t k, const int64_t n) {
 
     std::chrono::high_resolution_clock::time_point begin, end;
