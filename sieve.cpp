@@ -30,7 +30,7 @@ std::vector<uint8_t> flag_sieve(const int64_t n) {
         /* flag &= flag-1 は立っている最下位ビットを0に変える */
         for(uint8_t flag = flags[m1]; flag; flag &= flag-1) {
 
-            /* flagの最も右側に立っているビットの位置 */
+            /* flagの最下位ビットの位置 */
             idx_i1 = idx_i2 = std::countr_zero(flag);
             m = 30*m1*m1 + 2*m1*D[idx_i1] + D_q[idx_i1];
 
