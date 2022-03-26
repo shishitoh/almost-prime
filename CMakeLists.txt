@@ -7,11 +7,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(SRCS main.cpp sieve.cpp merge.cpp)
 file(GLOB SRCS ${SRCS} almprm*.cpp)
 
-if (UNIX)
-    set(TARGET almprm)
-elseif (WIN32)
-    set(TARGET almprm.exe)
-endif()
+set(TARGET almprm)
 
 add_executable(${TARGET} ${SRCS})
 

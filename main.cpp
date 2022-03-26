@@ -11,7 +11,7 @@ using f_almprm = std::vector<int64_t> (*)(const int8_t, const int64_t);
 
 constexpr char *STR_VERS[] = {"1", "2_1", "2_2", "2_3", "3_1", "3_2", "3_3"};
 constexpr f_almprm FUNCTIONS[] = {almprm1, almprm2_1, almprm2_2, almprm2_3, almprm3_1,almprm3_2, almprm3_3};
-constexpr int DEFAULT_IDX = 3;
+constexpr int DEFAULT_IDX = std::ranges::size(FUNCTIONS)-1;
 
 bool str_isnum(char *cp) {
 
@@ -56,10 +56,10 @@ int main(int argc, char *argv[]) {
     std::chrono::milliseconds ms = std::chrono::milliseconds(0);
 
     const int idx = args_validation_check(argc, argv);
-    if (idx < 0) {
-        fprintf(stderr, "ERROR: unrecognized options.\n");
+    if (idx <= 0) {
+        fprintf(stdout, "ERROR: unrecognized options.\n");
         for (int i = 0; i < argc; ++i) {
-            fprintf(stderr, "%d-th option; %s.\n", i+1, argv[i]);
+            fprintf(stdout, "%d-th option; %s.\n", i+1, argv[i]);
         }
         return 0;
     }
