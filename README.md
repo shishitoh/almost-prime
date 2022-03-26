@@ -2,7 +2,7 @@
 
 $k, n$について$n$未満の$k$-概素数を列挙する。almprm*.cppがアルゴリズムのメイン、数字の部分はバージョン。
 
-# HOWTOBUILD
+# BUILD
 
 ```
 mkdir build && cd build
@@ -10,7 +10,7 @@ cmake -S ../
 cmake --build ./
 ```
 
-現状はGCCとMinGWのみ想定。
+現状コンパイラはGCCとMinGWのみ想定。
 
 # USAGE
 

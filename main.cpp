@@ -10,43 +10,42 @@
 using f_almprm = std::vector<int64_t> (*)(const int8_t, const int64_t);
 
 constexpr char *STR_VERS[] = {"1", "2_1", "2_2", "2_3", "3_1", "3_2", "3_3"};
-constexpr f_almprm FUNCTIONS[] = {almprm1, almprm2_1, almprm2_2, almprm2_3, almprm3_1,almprm3_2, almprm3_3};
+constexpr f_almprm FUNCTIONS[] = {almprm1, almprm2_1, almprm2_2, almprm2_3, almprm3_1, almprm3_2, almprm3_3};
 constexpr int DEFAULT_IDX = std::ranges::size(FUNCTIONS)-1;
 
+/* 文字列が全部数字かを見る */
 bool str_isnum(char *cp) {
 
     for (; *cp; cp++) {
-        
+
         if (!std::isdigit(*cp)) {
-            std::cout << (int)*cp << " is not digit." << std::endl;
             return false;
         }
     }
     return true;
 }
 
-/* コマンドラインオプションが正しいか確認して、ついでに指定されている関数のversionを返す */
+/* コマンドラインオプションが正しいか確認して、ついでに指定されている関数のversionを表すindexを返す */
 int args_validation_check(int argc, char *argv[]) {
 
-    int idx = 0;
+    int idx = -1;
 
-    if (argc >= 3) {
-        if (str_isnum(argv[1]) && str_isnum(argv[2])) {
-            if (argc == 3) {
-            
-                idx = DEFAULT_IDX;
-            
-            } else if (argv[3][0] == '-') {
-            
-                for (std::size_t i = 0; i < std::ranges::size(FUNCTIONS); i++) {
-                    if (std::strcmp(argv[3]+1, STR_VERS[i]) == 0) {
-                        idx = i;
-                        break;
-                    }
+    if (argc >= 3 && str_isnum(argv[1]) && str_isnum(argv[2])) {
+        if (argc == 3) {
+
+            idx = DEFAULT_IDX;
+
+        } else if (argv[3][0] == '-') {
+
+            for (std::size_t i = 0; i < std::ranges::size(FUNCTIONS); i++) {
+                if (std::strcmp(argv[3]+1, STR_VERS[i]) == 0) {
+                    idx = i;
+                    break;
                 }
             }
         }
     }
+
     return idx;
 }
 
@@ -56,15 +55,13 @@ int main(int argc, char *argv[]) {
     std::chrono::milliseconds ms = std::chrono::milliseconds(0);
 
     const int idx = args_validation_check(argc, argv);
-    if (idx <= 0) {
-        fprintf(stdout, "ERROR: unrecognized options.\n");
-        for (int i = 0; i < argc; ++i) {
-            fprintf(stdout, "%d-th option; %s.\n", i+1, argv[i]);
+    if (idx < 0) {
+        fprintf(stdout, "ERROR: unrecognized options.\n\n");
+        for (int i = 1; i < argc; ++i) {
+            fprintf(stdout, "%d-th option: \"%s\"\n", i, argv[i]);
         }
         return 0;
     }
-
-    std::cout << "idx: " << idx << std::endl;
 
     const f_almprm almprm = FUNCTIONS[idx];
     const char *func_string = STR_VERS[idx];

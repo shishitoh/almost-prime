@@ -40,7 +40,7 @@ std::vector<int64_t> almprm2_3(const int8_t k, const int64_t n) {
         }
     }
     if (pcontinue) [[likely]] {
-        for (int64_t i = 0; i < fP.size(); ++i) {
+        for (std::size_t i = 0; i < fP.size(); ++i) {
             for (uint8_t flag = fP[i]; flag; flag &= flag-1) {
                 p = 30*i + D[std::countr_zero(flag)];
                 for (int64_t j = 1, r = p; r < n && j <= k+1; ++j, r *= p) {

@@ -89,6 +89,7 @@ std::vector<int64_t> to_primes(const std::vector<uint8_t> flags) {
         count += std::popcount(flag);
     }
     std::vector<int64_t> P(count);
+
     auto P_iter = std::begin(P);
 
     *(P_iter++) = 2;
