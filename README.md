@@ -10,6 +10,8 @@ cmake -S ../
 cmake --build ./
 ```
 
+現状はGCCとMinGWのみ想定。
+
 # USAGE
 
 ```
