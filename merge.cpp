@@ -5,9 +5,9 @@
 
 /* 前提: VVの各要素はsortされたvectorであること。
 まずVVをvectorのサイズでheapifyする。ただしVVの0番目と1番目が最少の二つとなるように
-1番目を根として全体をheapifyしてそのあと0番目と1番目を交換、1番目をheapifyという風にする。
+1番目を根として全体をheapifyしてそのあと0番目と1番目を交換、1番目をheapifyとheap化する。
 そのあとVVから0番目、1番目を取り出してmerge、VVにまた戻すというのを繰り返す。
-これで必ず最少のvector2つ同士をmergeできるのでmerge全体でかかる時間は理論上最少になる。
+これで必ず最短のvector2つ同士をmergeできるのでmerge全体でかかる時間は理論上最少になる。
 
 ただ、現在の実装だとmergeするたびに新しい配列を作成(malloc)してしまってるのでそこが課題。 */
 std::vector<int64_t> heap_merge(std::vector<std::vector<int64_t>> &VV) {

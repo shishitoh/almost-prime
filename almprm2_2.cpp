@@ -20,8 +20,6 @@ std::vector<int64_t> almprm2_2(const int8_t k, const int64_t n) {
 
     std::cout << "in sieve: " << ms.count() << " ms" << std::endl;
 
-    if (k == 1) [[unlikely]] return P;
-
     const int64_t kp = 1 << k;
     std::vector<int8_t> PF(n-kp);
 
