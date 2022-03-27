@@ -5,8 +5,8 @@
 #include <cmath>
 #include <chrono>
 
-#include "sieve.hpp"
-#include "merge.hpp"
+#include "sieve.h"
+#include "merge.h"
 
 std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
 

@@ -5,7 +5,7 @@
 #include <cstring>
 #include <unistd.h>
 
-#include "almprm.hpp"
+#include "almprm.h"
 
 using f_almprm = std::vector<int64_t> (*)(const int8_t, const int64_t);
 

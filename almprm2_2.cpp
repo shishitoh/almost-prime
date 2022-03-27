@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <chrono>
 
-#include "sieve.hpp"
+#include "sieve.h"
 
 std::vector<int64_t> almprm2_2(const int8_t k, const int64_t n) {
 

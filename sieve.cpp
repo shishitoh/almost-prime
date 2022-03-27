@@ -3,7 +3,7 @@
 #include <bit>
 #include <algorithm>
 
-#include "sieve.hpp"
+#include "sieve.h"
 
 std::vector<uint8_t> flag_sieve(const int64_t n) {
 
