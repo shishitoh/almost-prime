@@ -18,13 +18,13 @@ cmake --build ./
 # USAGE
 
 ```
-./almprm.exe k n -ver
+./almprm k n -ver
 ```
 
 $n$未満の$k$-概素数を5回列挙し、かかった時間の平均を出力。-verでバージョンを指定。例えばalmprm2_2.cppに対応するバージョンを使用したい場合は
 
 ```
-./almprm.exe k n -2_2
+./almprm k n -2_2
 ```
 と入力する。
 
