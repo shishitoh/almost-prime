@@ -93,5 +93,5 @@ constexpr uint8_t bitmasks[8][8] = {
 
 
 std::vector<uint8_t> flag_sieve(const int64_t);
-std::vector<int64_t> to_primes(const std::vector<uint8_t>);
+std::vector<int64_t> to_primes(const std::vector<uint8_t>&);
 std::vector<int64_t> sieve(const int64_t);

@@ -3,7 +3,7 @@
 #include <bit>
 #include <algorithm>
 
-#include "sieve.hpp"
+#include "sieve.h"
 
 std::vector<uint8_t> flag_sieve(const int64_t n) {
 
@@ -81,7 +81,7 @@ std::vector<uint8_t> flag_sieve(const int64_t n) {
     return flags;
 }
 
-std::vector<int64_t> to_primes(const std::vector<uint8_t> flags) {
+std::vector<int64_t> to_primes(const std::vector<uint8_t> &flags) {
 
     int64_t count = 3;
 

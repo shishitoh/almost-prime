@@ -5,6 +5,7 @@
 std::vector<int64_t> almprm2_1(const int8_t k, const int64_t n) {
 
     std::vector<int8_t> PF(n);
+    PF[0] = -1;
 
     for (int64_t i = 2; i < n; ++i) {
         if (PF[i] == 0) {
@@ -18,7 +19,7 @@ std::vector<int64_t> almprm2_1(const int8_t k, const int64_t n) {
 
     std::vector<int64_t> Pk(std::ranges::count(PF, k));
     auto Pk_iter = std::begin(Pk);
-    for (int64_t j = 1; j < n; ++j) {
+    for (int64_t j = 0; j < n; ++j) {
         if (PF[j] == k) {
             *(Pk_iter++) = j;
         }

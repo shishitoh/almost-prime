@@ -1,24 +1,15 @@
 #include <iostream>
-#include <cmath>
 #include <vector>
 #include <ranges>
 #include <algorithm>
-#include <chrono>
 
-#include "sieve.hpp"
+#include "sieve.h"
 
 std::vector<int64_t> almprm2_2(const int8_t k, const int64_t n) {
 
-    std::chrono::high_resolution_clock::time_point begin, end;
-    std::chrono::milliseconds ms = std::chrono::milliseconds(0);
+    if (k == 0) [[unlikely]] return {1};
 
-    begin = std::chrono::high_resolution_clock::now();
     const auto P = sieve(-(-n >> (k-1)));
-    end = std::chrono::high_resolution_clock::now();
-
-    ms = std::chrono::duration_cast<std::chrono::milliseconds>(end-begin);
-
-    std::cout << "in sieve: " << ms.count() << " ms" << std::endl;
 
     const int64_t kp = 1 << k;
     std::vector<int8_t> PF(n-kp);

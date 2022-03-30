@@ -3,10 +3,9 @@
 #include <ranges>
 #include <algorithm>
 #include <cmath>
-#include <chrono>
 
-#include "sieve.hpp"
-#include "merge.hpp"
+#include "sieve.h"
+#include "merge.h"
 
 void almprm_impl(const int8_t k, const int64_t n, const size_t minidx, const int64_t mulP,
                  const std::vector<int64_t> &P, std::vector<int64_t> &Pk, std::vector<size_t> &separr) {

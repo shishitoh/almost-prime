@@ -5,7 +5,8 @@
 #include <cstring>
 #include <unistd.h>
 
-#include "almprm.hpp"
+#include "almprm.h"
+#include "timer.h"
 
 using f_almprm = std::vector<int64_t> (*)(const int8_t, const int64_t);
 
@@ -51,9 +52,6 @@ int args_validation_check(int argc, char *argv[]) {
 
 int main(int argc, char *argv[]) {
 
-    std::chrono::high_resolution_clock::time_point begin, end;
-    std::chrono::milliseconds ms = std::chrono::milliseconds(0);
-
     const int idx = args_validation_check(argc, argv);
     if (idx < 0) {
         fprintf(stdout, "ERROR: unrecognized options.\n\n");
@@ -66,18 +64,20 @@ int main(int argc, char *argv[]) {
     const f_almprm almprm = FUNCTIONS[idx];
     const char *func_string = STR_VERS[idx];
 
-    const int k = atoi(argv[1]);
+    const int8_t k = atoi(argv[1]);
     const int64_t n = atoll(argv[2]);
 
     constexpr int COUNT = 5;
 
+    std::chrono::milliseconds ms = std::chrono::milliseconds(0);
+
     for (int i = 0; i < COUNT; ++i) {
 
-        begin = std::chrono::high_resolution_clock::now();
-        const auto Pk = almprm(k, n);
-        end = std::chrono::high_resolution_clock::now();
+        std::chrono::high_resolution_clock::duration time;
 
-        ms += std::chrono::duration_cast<std::chrono::milliseconds>(end-begin);
+        const auto Pk = timer(&time, almprm, k, n);
+
+        ms += std::chrono::duration_cast<std::chrono::milliseconds>(time);
 
         /*
         for (auto pk : Pk) {
