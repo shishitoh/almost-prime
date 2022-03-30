@@ -12,11 +12,8 @@ std::vector<int64_t> almprm2_3(const int8_t k, const int64_t n) {
     const int64_t kp = 1 << k;
     if (n <= kp) [[unlikely]] return {};
 
-    int64_t p;
     const int64_t maxp = -(-n >> (k-1));
-
     std::vector<uint8_t> fP = flag_sieve(maxp);
-
     std::vector<int8_t> PF(n-kp);
 
     for (auto p : {2, 3, 5}) {
@@ -29,6 +26,7 @@ std::vector<int64_t> almprm2_3(const int8_t k, const int64_t n) {
             }
         }
     }
+    int64_t p;
     for (std::size_t i = 0; i < fP.size(); ++i) {
         for (uint8_t flag = fP[i]; flag; flag &= flag-1) {
             p = 30*i + D[std::countr_zero(flag)];

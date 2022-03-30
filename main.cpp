@@ -79,15 +79,15 @@ int main(int argc, char *argv[]) {
 
         ms += std::chrono::duration_cast<std::chrono::milliseconds>(time);
 
+        /*
         for (auto pk : Pk) {
             std::cout << pk << " ";
         }
         std::cout << std::endl;
-        /*
         */
 
         sleep(1);
     }
 
-    std::cout << "almprm" << func_string << "(" << k << ", " << n << "): " << ms.count()/COUNT << " ms" << std::endl;
+    std::cout << "almprm" << func_string << "(" << (int)k << ", " << n << "): " << ms.count()/COUNT << " ms" << std::endl;
 }

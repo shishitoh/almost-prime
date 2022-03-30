@@ -7,7 +7,7 @@
 #include "sieve.h"
 #include "merge.h"
 
-std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
+std::vector<int64_t> almprm3_1(const int8_t k, const int64_t n) {
 
     if (k == 0) [[unlikely]] return {1};
 
@@ -16,12 +16,12 @@ std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
     if (k == 1) [[unlikely]] return P;
 
     std::vector<size_t> PIs(k-1);
-    size_t PIi;
+    size_t PIi, tmp;
     std::vector<int64_t>::iterator Pk_iter;
 
     int64_t Pmul = 1 << (k-1);
 
-    std::vector<std::vector<int64_t>> Pks;
+    std::vector<int64_t> Pk;
     std::vector<size_t> separr(0);
 
     const int64_t max = std::ceil(std::pow((long double)n, (long double)1/k));
@@ -32,8 +32,11 @@ std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
                                                         return P[x] * Pmul < n;
                                                     });
         if (PIs.back() < last) {
-            Pks.emplace_back(last - PIs.back());
-            Pk_iter = Pks.back().begin();
+            tmp = Pk.size();
+            // std::cout << last - PIs.back() << ' ';
+            Pk.resize(Pk.size() + last - PIs.back());
+            separr.push_back(Pk.size());
+            Pk_iter = Pk.begin() + tmp;
             for (size_t i = PIs.back(); i < last; ++i) {
                 *(Pk_iter++) = Pmul * P[i];
             }
@@ -42,13 +45,13 @@ std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
             for (int i = k-3; i >= 0; --i) {
                 if (PIs[i] == PIs.back()) {
                     continue;
+                } else {
+                    PIi = PIs[i]+1;
+                    for (int j = i; j < k-1; ++j) {
+                        PIs[j] = PIi;
+                    }
+                    break;
                 }
-                PIi = PIs[i]+1;
-                for (int j = i; j < k-1; ++j) {
-                    PIs[j] = PIi;
-                }
-                break;
-
             }
             if (max <= P[PIs[0]]) break;
         }
@@ -59,5 +62,7 @@ std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
         }
     }
 
-    return heap_merge(Pks);
+    recursive_inplace_merge(Pk, separr, 0, separr.size()-1);
+
+    return Pk;
 }
