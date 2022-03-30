@@ -79,11 +79,11 @@ int main(int argc, char *argv[]) {
 
         ms += std::chrono::duration_cast<std::chrono::milliseconds>(time);
 
-        /*
         for (auto pk : Pk) {
             std::cout << pk << " ";
         }
         std::cout << std::endl;
+        /*
         */
 
         sleep(1);

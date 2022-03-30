@@ -9,12 +9,15 @@
 
 std::vector<int64_t> almprm3_1(const int8_t k, const int64_t n) {
 
+    if (k == 0) [[unlikely]] return {1};
+
     const auto P = sieve(-(-n >> (k-1)));
+
+    if (k == 1) [[unlikely]] return P;
+
     std::vector<size_t> PIs(k-1);
     size_t PIi, tmp;
     std::vector<int64_t>::iterator Pk_iter;
-
-    if (k == 1) [[unlikely]] return P;
 
     int64_t Pmul = 1 << (k-1);
 

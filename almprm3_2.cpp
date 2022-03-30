@@ -9,12 +9,15 @@
 
 std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
 
+    if (k == 0) [[unlikely]] return {1};
+
     const auto P = sieve(-(-n >> (k-1)));
+
+    if (k == 1) [[unlikely]] return P;
+
     std::vector<size_t> PIs(k-1);
     size_t PIi;
     std::vector<int64_t>::iterator Pk_iter;
-
-    if (k == 1) [[unlikely]] return P;
 
     int64_t Pmul = 1 << (k-1);
 
@@ -39,13 +42,13 @@ std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
             for (int i = k-3; i >= 0; --i) {
                 if (PIs[i] == PIs.back()) {
                     continue;
-                } else {
-                    PIi = PIs[i]+1;
-                    for (int j = i; j < k-1; ++j) {
-                        PIs[j] = PIi;
-                    }
-                    break;
                 }
+                PIi = PIs[i]+1;
+                for (int j = i; j < k-1; ++j) {
+                    PIs[j] = PIi;
+                }
+                break;
+
             }
             if (max <= P[PIs[0]]) break;
         }
