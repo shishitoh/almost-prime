@@ -10,7 +10,7 @@
 
 using f_almprm = std::vector<int64_t> (*)(const int8_t, const int64_t);
 
-constexpr char *STR_VERS[] = {"1", "2_1", "2_2", "2_3", "3_1", "3_2", "3_3"};
+constexpr char STR_VERS[][8] = {"1", "2_1", "2_2", "2_3", "3_1", "3_2", "3_3"};
 constexpr f_almprm FUNCTIONS[] = {almprm1, almprm2_1, almprm2_2, almprm2_3, almprm3_1, almprm3_2, almprm3_3};
 constexpr int DEFAULT_IDX = std::ranges::size(FUNCTIONS)-1;
 
