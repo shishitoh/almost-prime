@@ -10,8 +10,6 @@
 void almprm_impl(const int8_t k, const int64_t n, const size_t minidx, const int64_t mulP,
                  const std::vector<int64_t> &P, std::vector<int64_t> &Pk, std::vector<size_t> &separr) {
 
-    // std::cout <<"k: " << (int)k << ", minidx: " << minidx << ", mulP: " << mulP << std::endl;
-
     const size_t maxidx = *std::ranges::partition_point(std::ranges::iota_view(minidx, P.size()),
                                                         [&](const size_t x) -> bool {
                                                             return P[x] < std::ceil(std::pow((n+mulP-1)/mulP, 1.0/k));
@@ -23,7 +21,6 @@ void almprm_impl(const int8_t k, const int64_t n, const size_t minidx, const int
         separr.push_back(Pk.size());
         auto Pk_iter = Pk.begin() + tmp;
         for (size_t i = minidx; i < maxidx; ++i) {
-            // std::cout << mulP*P[i] << std::endl;
             *(Pk_iter++) = mulP * P[i];
         }
     } else {
