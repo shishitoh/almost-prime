@@ -35,6 +35,8 @@ void almprm_impl(const int8_t k, const int64_t n, const size_t minidx, const int
 
 std::vector<int64_t> almprm3_3(const int8_t k, const int64_t n) {
 
+    if (k == 0) [[unlikely]] return {1};
+
     const auto P = sieve(-(-n >> (k-1)));
 
     std::vector<int64_t> Pk;
