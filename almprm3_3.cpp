@@ -7,7 +7,7 @@
 #include "sieve.h"
 #include "merge.h"
 
-std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
+std::vector<int64_t> almprm3_3(const int8_t k, const int64_t n) {
 
     if (k == 0) [[unlikely]] return {1};
 

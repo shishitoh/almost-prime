@@ -10,8 +10,6 @@
 void almprm_impl(const int8_t k, const int64_t n, const size_t minidx, const int64_t mulP,
                  const std::vector<int64_t> &P, std::vector<int64_t> &Pk, std::vector<size_t> &separr) {
 
-    // std::cout <<"k: " << (int)k << ", minidx: " << minidx << ", mulP: " << mulP << std::endl;
-
     const size_t maxidx = *std::ranges::partition_point(std::ranges::iota_view(minidx, P.size()),
                                                         [&](const size_t x) -> bool {
                                                             return P[x] < std::ceil(std::pow((n+mulP-1)/mulP, 1.0/k));
@@ -23,7 +21,6 @@ void almprm_impl(const int8_t k, const int64_t n, const size_t minidx, const int
         separr.push_back(Pk.size());
         auto Pk_iter = Pk.begin() + tmp;
         for (size_t i = minidx; i < maxidx; ++i) {
-            // std::cout << mulP*P[i] << std::endl;
             *(Pk_iter++) = mulP * P[i];
         }
     } else {
@@ -33,14 +30,14 @@ void almprm_impl(const int8_t k, const int64_t n, const size_t minidx, const int
     }
 }
 
-std::vector<int64_t> almprm3_3(const int8_t k, const int64_t n) {
+std::vector<int64_t> almprm3_1(const int8_t k, const int64_t n) {
 
     if (k == 0) [[unlikely]] return {1};
 
     const auto P = sieve(-(-n >> (k-1)));
 
     std::vector<int64_t> Pk;
-    std::vector<size_t> separr;
+    std::vector<size_t> separr = {0};
 
     almprm_impl(k, n, 0, 1, P, Pk, separr);
 

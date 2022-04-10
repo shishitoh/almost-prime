@@ -7,7 +7,7 @@
 #include "sieve.h"
 #include "merge.h"
 
-std::vector<int64_t> almprm3_1(const int8_t k, const int64_t n) {
+std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
 
     if (k == 0) [[unlikely]] return {1};
 
@@ -22,7 +22,7 @@ std::vector<int64_t> almprm3_1(const int8_t k, const int64_t n) {
     int64_t Pmul = 1 << (k-1);
 
     std::vector<int64_t> Pk;
-    std::vector<size_t> separr(0);
+    std::vector<size_t> separr = {0};
 
     const int64_t max = std::ceil(std::pow((long double)n, (long double)1/k));
 
@@ -33,7 +33,6 @@ std::vector<int64_t> almprm3_1(const int8_t k, const int64_t n) {
                                                     });
         if (PIs.back() < last) {
             tmp = Pk.size();
-            // std::cout << last - PIs.back() << ' ';
             Pk.resize(Pk.size() + last - PIs.back());
             separr.push_back(Pk.size());
             Pk_iter = Pk.begin() + tmp;
