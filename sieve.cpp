@@ -73,7 +73,7 @@ std::vector<uint8_t> flag_sieve(const int64_t n) {
             while (m < size) {
                 flags[m] &= bitmask[idx_i2];
                 m += G[idx_i2];
-                idx_i2 = (idx_i2 + 1) & 7;
+                ++idx_i2;
             }
         }
     }

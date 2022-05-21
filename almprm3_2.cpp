@@ -27,10 +27,13 @@ std::vector<int64_t> almprm3_2(const int8_t k, const int64_t n) {
     const int64_t max = std::ceil(std::pow((long double)n, (long double)1/k));
 
     while (true) {
-        size_t last = *std::ranges::partition_point(std::ranges::iota_view(PIs.back(), P.size()),
-                                                    [&](const size_t x) -> const bool {
-                                                        return P[x] * Pmul < n;
-                                                    });
+        size_t last = *std::ranges::partition_point(
+            std::ranges::iota_view(PIs.back(), P.size()),
+            [&](const size_t x) -> const bool {
+                return P[x] * Pmul < n;
+            }
+        );
+
         if (PIs.back() < last) {
             tmp = Pk.size();
             Pk.resize(Pk.size() + last - PIs.back());
