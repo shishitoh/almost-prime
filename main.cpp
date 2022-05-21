@@ -10,8 +10,8 @@
 
 using f_almprm = std::vector<int64_t> (*)(const int8_t, const int64_t);
 
-constexpr char STR_VERS[][8] = {"1", "2_1", "2_2", "2_3", "3_1", "3_2", "3_3"};
-constexpr f_almprm FUNCTIONS[] = {almprm1, almprm2_1, almprm2_2, almprm2_3, almprm3_1, almprm3_2, almprm3_3};
+constexpr char STR_VERS[][8] = {"1", "2_1", "2_2", "2_3", "3_1", "3_2", "3_3", "3_4"};
+constexpr f_almprm FUNCTIONS[] = {almprm1, almprm2_1, almprm2_2, almprm2_3, almprm3_1, almprm3_2, almprm3_3, almprm3_4};
 constexpr int DEFAULT_IDX = std::ranges::size(FUNCTIONS)-1;
 
 /* 文字列が全部数字かを見る */
@@ -71,22 +71,30 @@ int main(int argc, char *argv[]) {
 
     std::chrono::milliseconds ms = std::chrono::milliseconds(0);
 
+    const std::vector<int64_t> Pk_for_check = almprm2_1(k, n);
+    /*
+    for (auto pk : Pk_for_check) {
+        std::cout << pk << " ";
+    }
+    std::cout << std::endl;
+    */
+
     for (int i = 0; i < COUNT; ++i) {
 
         std::chrono::high_resolution_clock::duration time;
-
         const auto Pk = timer(&time, almprm, k, n);
-
         ms += std::chrono::duration_cast<std::chrono::milliseconds>(time);
 
+        if (Pk_for_check != Pk) {
+            std::cout << func_string << " is wrong!" << std::endl;
+            // exit(1);
+        }
         /*
         for (auto pk : Pk) {
             std::cout << pk << " ";
         }
         std::cout << std::endl;
         */
-
-        sleep(1);
     }
 
     std::cout << "almprm" << func_string << "(" << (int)k << ", " << n << "): " << ms.count()/COUNT << " ms" << std::endl;
